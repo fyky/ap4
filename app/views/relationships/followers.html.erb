@@ -1,0 +1,11 @@
+<h2>Followed Users</h2>
+<% if @users.exists? %>
+
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+      </tr>
+    <% end %>
+
+<% end %>
+  <p>ユーザーはいません</p>

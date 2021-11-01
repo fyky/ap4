@@ -12,9 +12,31 @@
           <td><strong>introduction</strong></td>
           <td><strong><%= user.introduction %></strong></td>
         </tr>
+        <tr>
+          <td><strong>follows</strong></td>
+          <td><strong><%= user.followings.count %></strong></td>
+        </tr>
+        <tr>
+          <td><strong>followed</strong></td>
+          <td><strong><%= user.followers.count %></strong></td>
+        </tr>
       </table>
     <p></p>
+    <% if current_page?(user_path(user.id)) %>
+      <% if current_user.following?(@user) %>
+        <%= link_to user_relationships_path(@user.id), method: :delete do %>
+        <button type="button" class="btn btn-success">フォローする</button>
+        <% end %>
+      <% else %>
+        <%= link_to user_relationships_path(@user.id), method: :post do %>
+          <button type="button" class="btn btn-info">フォロー外す</button>
+        <% end %>
+      <% end %>
+
+    <% else current_page?(user_path(user.id)) %>
     <%= link_to edit_user_path(user), class: "btn btn-outline-primary  btn-block btn-outline-dark" do %>
       <i class="fas fa-user-cog"></i>
+    <% end %>
+
     <% end %>
 
